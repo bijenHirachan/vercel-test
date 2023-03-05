@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Get Apples</button>
+    <ul id="applelist"></ul>
+  </body>
+
+  <script>
+    const btn = document.getElementById("btn");
+    const appleList = document.getElementById("applelist");
+
+    async function getApples() {
+      const res = await fetch("/apples");
+      const { apples } = await res.json();
+      let html = "";
+      apples.forEach((item) => {
+        html += `<li>${item.name}</li>`;
+      });
+      appleList.innerHTML = html;
+    }
+
+    btn.addEventListener("click", getApples);
+  </script>
+</html>
